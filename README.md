@@ -1,2 +1,6 @@
-# koa-rendering-react-example
-koa2 server side rendering react example
+# Server Side Render React 
+
+```js
+renderToString
+```
+
