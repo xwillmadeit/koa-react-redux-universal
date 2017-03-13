@@ -1,13 +1,15 @@
+const webpack = require('webpack')
 const { resolve } = require('path')
 
 module.exports = {
 	entry: {
-		home: './public/src/js/home.js',
-		dota: './public/src/js/dota.js',
-		lol: './public/src/js/lol.js'
+		vendor: ['react', 'react-dom'],
+		home: './client/home.js',
+		dota: './client/dota.js',
+		lol: './client/lol.js'
 	},
 	output: {
-		path: resolve(__dirname, 'public/dist'),
+		path: resolve(__dirname, 'public/js'),
 		filename: '[name].bundle.js'
 	},
 	module: {
@@ -18,5 +20,10 @@ module.exports = {
 				loader: 'babel-loader'
 			}
 		]
-	}
+	},
+	plugins: [
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor'
+		})
+	]
 }

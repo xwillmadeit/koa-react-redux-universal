@@ -2,24 +2,9 @@
 
 ## 开发模式
 
-同时开启以下 npm 任务
-
 ```js 
 npm run dev
 ```
 
-```js
-npm run watch
-```
-
-## Build && 启动
-
-```js
-npm run build
-```
-
-then
-
-```js
-npm run serve
-```
+## 前后端分离资料整理
+https://feclub.cn/post/content/qudian_koa

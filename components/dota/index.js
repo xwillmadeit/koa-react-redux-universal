@@ -15,13 +15,13 @@ export default class Dota extends Component {
 			<html>
                 <head>
                     <title>Dota Page</title>
-                    <link rel="stylesheet" href="/style.css" />
                 </head>
                 <body>
                     <div>
                         <h1>Dota Page</h1>
                         <button onClick={this.handleClick}>click me</button>
-                        <script src="/dist/dota.bundle.js" />
+                        <script src="/js/vendor.bundle.js" />
+                        <script src="/js/dota.bundle.js" />
                     </div>
                 </body>
             </html>

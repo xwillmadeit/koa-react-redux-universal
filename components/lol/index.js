@@ -14,13 +14,13 @@ export default class Lol extends Component {
 			<html>
                 <head>
                     <title>Lol Page</title>
-                    <link rel="stylesheet" href="/style.css" />
                 </head>
                 <body>
                     <div>
                         <h1>Lol Page</h1>
                         <button onClick={this.handleClick}>click me</button>
-                        <script src="/dist/lol.bundle.js" />
+                        <script src="/js/vendor.bundle.js" />
+                        <script src="/js/lol.bundle.js" />
                     </div>
                 </body>
             </html>

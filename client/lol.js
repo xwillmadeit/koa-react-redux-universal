@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from '../../../views/dota'
+import Lol from '../components/lol'
 
 ReactDOM.render(
-	<App />,
+	<Lol />,
 	document
 )

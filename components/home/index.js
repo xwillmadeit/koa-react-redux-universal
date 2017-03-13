@@ -11,6 +11,10 @@ export default class Hello extends Component {
 		this.handleClick = this.handleClick.bind(this)
 	}
 
+    componentDidMount() {
+        console.log('component did mount')
+    }
+
 	handleClick(e) {
 		this.setState({
 			title: 'wow, the title changed!!!'
@@ -22,7 +26,6 @@ export default class Hello extends Component {
 			<html>
                 <head>
                     <title>react universal</title>
-                    <link rel="stylesheet" href="/style.css" />
                 </head>
                 <body>
                     <div>
@@ -33,10 +36,12 @@ export default class Hello extends Component {
                         	<li><a href="/lol">Lol</a></li>
                         	<li><a href="/dota">Dota</a></li>
                         </ul>
-                        <script src="/dist/home.bundle.js" />
+                        <script src="/js/vendor.bundle.js" />
+                        <script src="/js/home.bundle.js" />
                     </div>
                 </body>
             </html>
 		)
 	}
 }
+
