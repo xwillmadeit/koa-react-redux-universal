@@ -12,19 +12,10 @@ export default class Dota extends Component {
 
 	render() {
 		return (
-			<html>
-                <head>
-                    <title>Dota Page</title>
-                </head>
-                <body>
-                    <div>
-                        <h1>Dota Page</h1>
-                        <button onClick={this.handleClick}>click me</button>
-                        <script src="/js/vendor.bundle.js" />
-                        <script src="/js/dota.bundle.js" />
-                    </div>
-                </body>
-            </html>
+            <div>
+                <h1>Dota Page</h1>
+                <button onClick={this.handleClick}>click me</button>
+            </div>
 		)
 	}
 }

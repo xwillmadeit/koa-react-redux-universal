@@ -4,5 +4,5 @@ import Dota from '../components/dota'
 
 ReactDOM.render(
 	<Dota />,
-	document
+	document.getElementById('root')
 )

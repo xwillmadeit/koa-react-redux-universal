@@ -1,15 +1,16 @@
 const webpack = require('webpack')
 const { resolve } = require('path')
+const appRoot = process.cwd()
 
 module.exports = {
 	entry: {
-		vendor: ['react', 'react-dom'],
+		vendor: ['react', 'react-dom', 'redux', 'react-redux'],
 		home: './client/home.js',
 		dota: './client/dota.js',
 		lol: './client/lol.js'
 	},
 	output: {
-		path: resolve(__dirname, 'public/js'),
+		path: resolve(appRoot, 'public/js'),
 		filename: '[name].bundle.js'
 	},
 	module: {

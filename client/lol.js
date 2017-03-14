@@ -4,5 +4,5 @@ import Lol from '../components/lol'
 
 ReactDOM.render(
 	<Lol />,
-	document
+	document.getElementById('root')
 )

@@ -1,47 +1,59 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { increment, decrement } from '../../actions/home'
 
-export default class Hello extends Component {
+class Hello extends Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			title: 'this is a server side rendering react...'
-		}
-
-		this.handleClick = this.handleClick.bind(this)
+		this.incre = this.incre.bind(this)
+		this.decre = this.decre.bind(this)
 	}
 
     componentDidMount() {
         console.log('component did mount')
     }
 
-	handleClick(e) {
-		this.setState({
-			title: 'wow, the title changed!!!'
-		})
+	incre() {
+		this.props.incre(20)
+	}
+
+	decre() {
+		this.props.decre(3)
 	}
 
 	render() {
 		return (
-			<html>
-                <head>
-                    <title>react universal</title>
-                </head>
-                <body>
-                    <div>
-                        <h1>Hello World!</h1>
-                        <p>{this.state.title}</p>
-                        <button onClick={this.handleClick}>Click Me</button>
-                        <ul>
-                        	<li><a href="/lol">Lol</a></li>
-                        	<li><a href="/dota">Dota</a></li>
-                        </ul>
-                        <script src="/js/vendor.bundle.js" />
-                        <script src="/js/home.bundle.js" />
-                    </div>
-                </body>
-            </html>
+            <div>
+                <h1>Hello World...</h1>
+                <p>{this.props.counter}</p>
+                <button onClick={this.incre}>++</button>
+                <button onClick={this.decre}>--</button>
+                <ul>
+                	<li><a href="/lol">Lol</a></li>
+                	<li><a href="/dota">Dota</a></li>
+                </ul>
+            </div>
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		counter: state.counter
+	}
+} 
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		incre: (num) => {
+			dispatch(increment(num))
+		},
+		decre: (num) => {
+			dispatch(decrement(num))
+		} 
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hello)
 
