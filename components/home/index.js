@@ -38,22 +38,23 @@ class Hello extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 	return {
 		counter: state.counter
 	}
-} 
+}
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
 	return {
-		incre: (num) => {
-			dispatch(increment(num))
-		},
-		decre: (num) => {
-			dispatch(decrement(num))
-		} 
+		incre: (num) => dispatch(increment(num)),
+		decre: (num) => dispatch(decrement(num))
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Hello)
+Hello.propTypes = {
+	incre: React.PropTypes.func.isRequired,
+	decre: React.PropTypes.func.isRequired,
+	counter: React.PropTypes.number.isRequired
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(Hello)

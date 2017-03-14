@@ -31,7 +31,7 @@ export const getHtmlTemplate = (html, bundleName, preloadedState) => {
 
 	const reduxScript = typeof preloadedState !== 'undefined' ? `
 		<script>
-      		window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      		window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
     	</script>
 	` : ``
 

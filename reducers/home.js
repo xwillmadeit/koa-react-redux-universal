@@ -4,7 +4,7 @@ export const homeReducer = (state = {
 	title: 'what the fuck is the home page...',
 	counter: 0
 }, action) => {
-	switch(action.type) {
+	switch (action.type) {
 		case INCREMENT:
 			return {
 				...state,
@@ -15,6 +15,7 @@ export const homeReducer = (state = {
 				...state,
 				counter: state.counter - action.payload
 			}
+		default: 
+			return state
 	}
-	return state
 }
