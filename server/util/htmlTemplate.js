@@ -2,25 +2,31 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { StaticRouter, matchPath } from 'react-router-dom'
 import { bundleFolder } from '../config/constants'
 
-export const renderPage = (Module, bundleName, reducer) => {
+export const renderPage = (ctx, Module, bundleName, reducer) => {
 	let html,
-		preloadedState
+		preloadedState,
+		context = {}
 
 	if (typeof reducer !== 'undefined') {
 		const store = createStore(reducer)
 
 		html = renderToString(
-		    <Provider store={store}>
-      			<Module />
-		    </Provider>
+			<StaticRouter>
+			    <Provider store={store}>
+	      			<Module />
+			    </Provider>
+		    </StaticRouter>
 	  	)
 
 	  	preloadedState = store.getState()
 	} else {
 		html = renderToString(
-  			<Module />
+		 	<StaticRouter location={ctx.request.url} context={context}>
+  				<Module />
+  			</StaticRouter>
 	  	)
 	}
 

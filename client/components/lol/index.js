@@ -70,6 +70,7 @@ export default class Lol extends Component {
                             value={this.state.password}
                             onChange={this.handleChange} 
                             id="password" />
+                        <span>(password)</span>
                     </div>
                     <button onClick={this.handleClick}>login</button>
                 </form>

@@ -3,6 +3,7 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
+import logger from 'koa-logger'
 import webpack from 'webpack'
 import webpackConfig from '../webpack.config'
 import webpackMiddleware from 'koa-webpack-dev-middleware'
@@ -19,6 +20,7 @@ const protectedRouter = new Router()
 
 //initialize app instance
 const app = new Koa()
+app.use(logger())
 app.use(bodyParser())
 app.use(serve(path.resolve(__dirname + '/public')))
 app.use(router.routes()).use(router.allowedMethods())
@@ -31,19 +33,23 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 router.get('/', (ctx, next) => {
-	ctx.body = renderPage(Home, 'home.bundle.js', homeReducer)
+	ctx.body = renderPage(ctx, Home, 'home.bundle.js', homeReducer)
 })
 
 router.get('/home', (ctx, next) => {
-	ctx.body = renderPage(Home, 'home.bundle.js', homeReducer)
+	ctx.body = renderPage(ctx, Home, 'home.bundle.js', homeReducer)
 })
 
 router.get('/lol', (ctx, next) => {
-	ctx.body = renderPage(Lol, 'lol.bundle.js')
+	ctx.body = renderPage(ctx, Lol, 'lol.bundle.js')
 })
 
 router.get('/dota', (ctx, next) => {
-	ctx.body = renderPage(Dota, 'dota.bundle.js')
+	ctx.body = renderPage(ctx, Dota, 'dota.bundle.js')
+})
+
+router.get('/dota/:subpage', (ctx, next) => {
+	ctx.body = renderPage(ctx, Dota, 'dota.bundle.js')
 })
 
 router.post('/login', authenticate, (ctx, next) => {
