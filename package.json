@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=dev nodemon server/index.js --exec babel-node"
+    "dev": "NODE_ENV=dev nodemon server/server.js --exec babel-node"
   },
   "keywords": [],
   "author": "xwillmadeit <xiesenzhengyi@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.15.3",
     "koa": "^2.0.1",
+    "koa-bodyparser": "^4.1.0",
+    "koa-jwt": "^3.0.0",
     "koa-router": "^7.0.1",
     "koa-static": "^3.0.0",
     "react": "^15.4.2",

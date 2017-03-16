@@ -5,9 +5,9 @@ const appRoot = process.cwd()
 module.exports = {
 	entry: {
 		vendor: ['react', 'react-dom', 'redux', 'react-redux'],
-		home: './client/home.js',
-		dota: './client/dota.js',
-		lol: './client/lol.js'
+		home: './client/entries/home.js',
+		dota: './client/entries/dota.js',
+		lol: './client/entries/lol.js'
 	},
 	output: {
 		path: resolve(appRoot, 'public/js'),
@@ -18,7 +18,10 @@ module.exports = {
 			{
 				test: /\.js$/,
 				exclude: resolve(__dirname, 'node_modules'),
-				loader: 'babel-loader!eslint-loader'
+				use: [
+					'babel-loader',
+					'eslint-loader'
+				]
 			}
 		]
 	},

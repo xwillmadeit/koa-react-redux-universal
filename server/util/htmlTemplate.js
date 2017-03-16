@@ -13,14 +13,14 @@ export const renderPage = (Module, bundleName, reducer) => {
 
 		html = renderToString(
 		    <Provider store={store}>
-	      		<Module />
+      			<Module />
 		    </Provider>
 	  	)
 
 	  	preloadedState = store.getState()
 	} else {
 		html = renderToString(
-      		<Module />
+  			<Module />
 	  	)
 	}
 

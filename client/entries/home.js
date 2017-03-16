@@ -15,6 +15,5 @@ ReactDOM.render(
 	<Provider store={store}>
 		<Home />
 	</Provider>,
-	/* eslint-disable comma-dangle */
 	document.getElementById('root')
 )
