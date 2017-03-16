@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router-dom'
-import { bundleFolder } from '../config/constants'
+import { bundleFolder, devBundleFolder } from '../config/constants'
 
 export const renderPage = (ctx, Module, bundleName, reducer) => {
 	let html,
@@ -41,12 +41,14 @@ export const getHtmlTemplate = (html, bundleName, preloadedState) => {
     	</script>
 	` : ``
 
-	const vendorBundleScript = `
-		<script src="${bundleFolder}/vendor.bundle.js"></script>
+	const folder = process.env.NODE_ENV === 'dev' ? devBundleFolder : bundleFolder
+
+	const vendorBundleScript =  `
+		<script src="${folder}/vendor.bundle.js"></script>
 	`
 
 	const moduleBundleScript = `
-		<script src="${bundleFolder}/${bundleName}"></script>
+		<script src="${folder}/${bundleName}"></script>
 	`
 
 	return `

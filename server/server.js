@@ -1,12 +1,9 @@
-import path from 'path'
+import { resolve } from 'path'
 import Koa from 'koa'
 import serve from 'koa-static'
 import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
 import logger from 'koa-logger'
-import webpack from 'webpack'
-import webpackConfig from '../webpack.config'
-import webpackMiddleware from 'koa-webpack-dev-middleware'
 import authenticate from './middlewares/authenticate'
 import secret from './middlewares/jwtSecret'
 import Home from '../client/components/home'
@@ -20,17 +17,19 @@ const protectedRouter = new Router()
 
 //initialize app instance
 const app = new Koa()
+
 app.use(logger())
 app.use(bodyParser())
-app.use(serve(path.resolve(__dirname + '/public')))
-app.use(router.routes()).use(router.allowedMethods())
 
-if (process.env.NODE_ENV === 'dev') {
-	app.use(webpackMiddleware(webpack(webpackConfig), {
-		publicPath: '/public/js',
-		lazy: true
-	}))
-}
+app.use(async (ctx, next) => {
+	if (__DEV__) {
+	 	webpackIsomorphicTools.refresh()
+		await next()
+	}
+})
+
+app.use(serve(resolve(__dirname + '/public')))
+app.use(router.routes()).use(router.allowedMethods())
 
 router.get('/', (ctx, next) => {
 	ctx.body = renderPage(ctx, Home, 'home.bundle.js', homeReducer)
