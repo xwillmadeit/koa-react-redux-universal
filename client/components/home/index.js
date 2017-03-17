@@ -3,22 +3,15 @@ import { connect } from 'react-redux'
 import { increment, decrement } from '../../actions/home'
 
 class Hello extends Component {
-	constructor(props) {
-		super(props)
-
-		this.incre = this.incre.bind(this)
-		this.decre = this.decre.bind(this)
-	}
-
     componentDidMount() {
         console.log('component did mount')
     }
 
-	incre() {
-		this.props.incre(20)
-	}
+    incre = () => {
+    	this.props.incre(3)
+    }
 
-	decre() {
+	decre = () => {
 		this.props.decre(3)
 	}
 
