@@ -37,13 +37,13 @@ const getHtmlTemplate = (html, moduleName, preloadedState) => {
 	const assets = webpackIsomorphicTools.assets()
 
 	// styles
-	const vendorStyleHTML = `
+	const vendorStyleHTML = assets.styles.vendor ? `
 		<link href="${assets.styles.vendor}" rel="stylesheet" type="text/css" />
-	`
+	` : ``
 
 	const moduleStyleHTML = assets.styles[moduleName] ? `
 		<link href="${assets.styles[moduleName]}" rel="stylesheet" type="text/css" />
-	`: ``
+	` : ``
 
 	// scripts
 	const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
@@ -65,7 +65,7 @@ const getHtmlTemplate = (html, moduleName, preloadedState) => {
     <html>
       <head>
       	<meta charset="utf-8" />
-      	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+      	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <title>${moduleName} Page</title>
         ${vendorStyleHTML}

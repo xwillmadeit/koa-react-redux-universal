@@ -49,7 +49,10 @@ module.exports = {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor'
 		}),
-		new ExtractTextPlugin(__DEV__ ? '[name].css' : '[name].[contenthash:8].css'),
+		new ExtractTextPlugin({
+			filename: '[name].[contenthash:8].css',
+			disable: __DEV__
+		}),
 		webpack_isomorphic_tools_plugin
 	],
 	devtool: __DEV__ ? 'cheap-module-eval-source-map' : 'hidden-source-map'

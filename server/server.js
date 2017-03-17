@@ -54,16 +54,15 @@ router.post('/login', authenticate, (ctx, next) => {
 	ctx.body = ctx.authenticateData
 })
 
+router.get('*', async(ctx, next) => {
+	ctx.body = 'Page not exists...'
+})
+
 app.use(secret)
 app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods())
 
 protectedRouter.get('/lol/users', async(ctx, next) => {
 	ctx.body = { users: [ { name: 'jack' }, { name: 'bob' } ]}
-})
-
-// fallback 404 page
-app.use(async (ctx, next) => {
-	ctx.body = 'Page not exists...'
 })
 
 app.listen(4000, () => {
