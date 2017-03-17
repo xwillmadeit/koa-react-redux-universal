@@ -12,11 +12,10 @@ import Lol from '../client/components/lol'
 import { homeReducer } from '../client/reducers/home'
 import { renderPage } from './util/htmlTemplate'
 
+// initialize app instance
+const app = new Koa()
 const router = new Router()
 const protectedRouter = new Router()
-
-//initialize app instance
-const app = new Koa()
 
 app.use(logger())
 app.use(bodyParser())
@@ -24,31 +23,31 @@ app.use(bodyParser())
 app.use(async (ctx, next) => {
 	if (__DEV__) {
 	 	webpackIsomorphicTools.refresh()
-		await next()
 	}
+	await next()
 })
 
 app.use(serve(resolve(__dirname + '/public')))
 app.use(router.routes()).use(router.allowedMethods())
 
 router.get('/', (ctx, next) => {
-	ctx.body = renderPage(ctx, Home, 'home.bundle.js', homeReducer)
+	ctx.body = renderPage(ctx, Home, 'home', homeReducer)
 })
 
 router.get('/home', (ctx, next) => {
-	ctx.body = renderPage(ctx, Home, 'home.bundle.js', homeReducer)
+	ctx.body = renderPage(ctx, Home, 'home', homeReducer)
 })
 
 router.get('/lol', (ctx, next) => {
-	ctx.body = renderPage(ctx, Lol, 'lol.bundle.js')
+	ctx.body = renderPage(ctx, Lol, 'lol')
 })
 
 router.get('/dota', (ctx, next) => {
-	ctx.body = renderPage(ctx, Dota, 'dota.bundle.js')
+	ctx.body = renderPage(ctx, Dota, 'dota')
 })
 
 router.get('/dota/:subpage', (ctx, next) => {
-	ctx.body = renderPage(ctx, Dota, 'dota.bundle.js')
+	ctx.body = renderPage(ctx, Dota, 'dota')
 })
 
 router.post('/login', authenticate, (ctx, next) => {
@@ -59,7 +58,6 @@ app.use(secret)
 app.use(protectedRouter.routes()).use(protectedRouter.allowedMethods())
 
 protectedRouter.get('/lol/users', async(ctx, next) => {
-	console.log(ctx.state.user)
 	ctx.body = { users: [ { name: 'jack' }, { name: 'bob' } ]}
 })
 

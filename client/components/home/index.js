@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { increment, decrement } from '../../actions/home'
+import '../../styles/main.css'
 
 class Hello extends Component {
     componentDidMount() {

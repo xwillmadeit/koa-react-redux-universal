@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import setAuthorizationToken from '../../utils/setAuthorizationToken'
 import LoginForm from '../login/loginForm'
+import '../../styles/main.css'
+import '../../styles/lol.css'
 
 export default class Lol extends Component {
     state = {

@@ -3,9 +3,8 @@ import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router-dom'
-import { bundleFolder, devBundleFolder } from '../config/constants'
 
-export const renderPage = (ctx, Module, bundleName, reducer) => {
+export const renderPage = (ctx, Module, moduleName, reducer) => {
 	let html,
 		preloadedState,
 		context = {}
@@ -30,38 +29,53 @@ export const renderPage = (ctx, Module, bundleName, reducer) => {
 	  	)
 	}
 
-  	return getHtmlTemplate(html, bundleName, preloadedState)
+  	return getHtmlTemplate(html, moduleName, preloadedState)
 }
 
-export const getHtmlTemplate = (html, bundleName, preloadedState) => {
+const getHtmlTemplate = (html, moduleName, preloadedState) => {
 
-	const reduxScript = typeof preloadedState !== 'undefined' ? `
+	const assets = webpackIsomorphicTools.assets()
+
+	// styles
+	const vendorStyleHTML = `
+		<link href="${assets.styles.vendor}" rel="stylesheet" type="text/css" />
+	`
+
+	const moduleStyleHTML = assets.styles[moduleName] ? `
+		<link href="${assets.styles[moduleName]}" rel="stylesheet" type="text/css" />
+	`: ``
+
+	// scripts
+	const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
 		<script>
       		window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
     	</script>
 	` : ``
 
-	const folder = process.env.NODE_ENV === 'dev' ? devBundleFolder : bundleFolder
-
-	const vendorBundleScript =  `
-		<script src="${folder}/vendor.bundle.js"></script>
+	const vendorScriptHTML =  `
+		<script src="${assets.javascript.vendor}"></script>
 	`
 
-	const moduleBundleScript = `
-		<script src="${folder}/${bundleName}"></script>
+	const moduleScriptHTML = `
+		<script src="${assets.javascript[moduleName]}"></script>
 	`
 
 	return `
     <!doctype html>
     <html>
       <head>
-        <title>${bundleName.split('.')[0]} Page</title>
+      	<meta charset="utf-8" />
+      	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>${moduleName} Page</title>
+        ${vendorStyleHTML}
+        ${moduleStyleHTML}
       </head>
       <body>
         <div id="root">${html}</div>
-        ${reduxScript}
-        ${vendorBundleScript}
-        ${moduleBundleScript}
+        ${reduxScriptHTML}
+        ${vendorScriptHTML}
+        ${moduleScriptHTML}
       </body>
     </html>
     `

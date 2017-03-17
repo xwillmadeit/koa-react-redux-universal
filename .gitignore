@@ -1,3 +1,4 @@
-dist
+server/public
 node_modules
 webpack-assets.json
+npm-debug.log*

@@ -1,14 +1,24 @@
 {
   "name": "koa-rendering-react",
   "version": "0.0.1",
-  "description": "",
+  "description": "Universal React Multi-Page App w/ koa2",
   "main": "index.js",
   "scripts": {
     "dev": "npm run server-dev & npm run webpack-dev",
     "server-dev": "NODE_ENV=dev nodemon server/index.js --exec babel-node",
-    "webpack-dev": "NODE_ENV=dev babel-node server/webpack.devServer.js"
+    "webpack-dev": "NODE_ENV=dev babel-node server/webpack.devServer.js",
+    "prebuild:client": "rm -rf server/public",
+    "build:client": "NODE_ENV=prod webpack -p",
+    "start": "NODE_ENV=prod nodemon server/index.js --exec babel-node"
   },
-  "keywords": [],
+  "keywords": [
+    "universal",
+    "react",
+    "redux",
+    "react-router",
+    "koa2",
+    "webpack-isomorphic"
+  ],
   "author": "xwillmadeit <xiesenzhengyi@gmail.com>",
   "license": "MIT",
   "dependencies": {
@@ -42,6 +52,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.10.1",
     "koa-webpack-dev-middleware": "^1.4.4",
     "nodemon": "^1.11.0",

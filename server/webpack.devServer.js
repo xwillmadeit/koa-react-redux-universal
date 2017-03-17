@@ -7,7 +7,7 @@ const app = new Koa()
 const compiler = webpack(webpackConfig)
 
 const serverOptions = {
-	contentBase: `http://localhost:4000`,
+	contentBase: 'http://localhost:4000',
 	quiet: true,
 	noInfo: true,
 	hot: true,
