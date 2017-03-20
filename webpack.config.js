@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const { resolve } = require('path')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const appRoot = process.cwd()
 const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin')
 
@@ -18,9 +18,9 @@ module.exports = {
 		lol: './client/entries/lol.js'
 	},
 	output: {
-		path: resolve(appRoot, 'server', 'public', 'js'),
+		path: resolve(appRoot, 'server', 'public', 'build'),
 		filename: __DEV__ ? '[name].bundle.js' : '[name].[chunkhash:8].js',
-		publicPath: __DEV__ ? 'http://localhost:4001/js/' : 'http://localhost:4000/js/'
+		publicPath: __DEV__ ? 'http://localhost:4001/build/' : 'http://localhost:4000/build/'
 	},
 	module: {
 		rules: [
@@ -35,8 +35,8 @@ module.exports = {
 	      	{
 		        test: /\.css$/,
 		        use: ExtractTextPlugin.extract({
-	          		fallback: "style-loader",
-	          		use: "css-loader"
+	          		fallback: 'style-loader',
+	          		use: 'css-loader'
 		        })
 	      	},
 			{

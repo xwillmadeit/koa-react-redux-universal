@@ -7,6 +7,7 @@
     "dev": "npm run server-dev & npm run webpack-dev",
     "server-dev": "NODE_ENV=dev nodemon server/index.js --exec babel-node",
     "webpack-dev": "NODE_ENV=dev babel-node server/webpack.devServer.js",
+    "prebuild:client": "rm -rf server/public/js",
     "build:client": "NODE_ENV=prod webpack -p",
     "build": "npm run build:client && npm run compile",
     "compile": "npm run compile:client && npm run compile:server",

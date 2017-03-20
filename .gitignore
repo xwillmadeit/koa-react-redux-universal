@@ -1,4 +1,4 @@
-server/public
+server/public/build
 node_modules
 webpack-assets.json
 npm-debug.log*
