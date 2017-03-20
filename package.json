@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run server-dev & npm run webpack-dev",
-    "server-dev": "NODE_ENV=dev nodemon server/index.js --exec babel-node",
-    "webpack-dev": "NODE_ENV=dev babel-node server/webpack.devServer.js",
+    "server-dev": "cross-env NODE_ENV=dev nodemon server/index.js --exec babel-node",
+    "webpack-dev": "cross-env NODE_ENV=dev babel-node server/webpack.devServer.js",
     "prebuild:client": "rm -rf server/public/js",
-    "build:client": "NODE_ENV=prod webpack -p",
+    "build:client": "cross-env NODE_ENV=prod webpack -p",
     "build": "npm run build:client && npm run compile",
     "compile": "npm run compile:client && npm run compile:server",
     "compile:client": "babel client -d dist/client --ignore client/images client/styles",
@@ -16,7 +16,7 @@
     "compile:server": "babel server -d dist/server --ignore server/public",
     "postcompile:server": "cp -r server/public dist/server/public",
     "postbuild": "cp webpack-assets.json dist && cp isomorphic-config.js dist",
-    "start": "NODE_ENV=prod node dist/server/index.js"
+    "start": "cross-env NODE_ENV=prod node dist/server/index.js"
   },
   "keywords": [
     "universal",
@@ -55,6 +55,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-react": "^6.23.0",
+    "cross-env": "^3.2.4",
     "css-loader": "^0.27.3",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
