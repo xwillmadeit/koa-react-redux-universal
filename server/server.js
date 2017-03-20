@@ -4,6 +4,7 @@ import serve from 'koa-static'
 import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
 import logger from 'koa-logger'
+import favicon from 'koa-favicon'
 import authenticate from './middlewares/authenticate'
 import secret from './middlewares/jwtSecret'
 import Home from '../client/components/home'
@@ -19,6 +20,7 @@ const protectedRouter = new Router()
 
 app.use(logger())
 app.use(bodyParser())
+app.use(favicon(__dirname + '/public/favicon.ico'))
 
 app.use(async (ctx, next) => {
 	if (__DEV__) {

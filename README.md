@@ -6,9 +6,10 @@
 npm run dev
 ```
 
-## 前后端分离资料整理
+## 前后端分离／react 同构资料
 https://feclub.cn/post/content/qudian_koa
 https://ruby-china.org/topics/29835
+http://www.aliued.com/?p=3077
 
 ## 遇到的一些问题
 

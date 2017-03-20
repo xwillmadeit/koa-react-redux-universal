@@ -7,9 +7,15 @@
     "dev": "npm run server-dev & npm run webpack-dev",
     "server-dev": "NODE_ENV=dev nodemon server/index.js --exec babel-node",
     "webpack-dev": "NODE_ENV=dev babel-node server/webpack.devServer.js",
-    "prebuild:client": "rm -rf server/public",
     "build:client": "NODE_ENV=prod webpack -p",
-    "start": "NODE_ENV=prod nodemon server/index.js --exec babel-node"
+    "build": "npm run build:client && npm run compile",
+    "compile": "npm run compile:client && npm run compile:server",
+    "compile:client": "babel client -d dist/client --ignore client/images client/styles",
+    "postcompile:client": "cp -r client/images dist/client/images && cp -r client/styles dist/client/styles",
+    "compile:server": "babel server -d dist/server --ignore server/public",
+    "postcompile:server": "cp -r server/public dist/server/public",
+    "postbuild": "cp webpack-assets.json dist && cp isomorphic-config.js dist",
+    "start": "NODE_ENV=prod node dist/server/index.js"
   },
   "keywords": [
     "universal",
@@ -23,8 +29,10 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.23.0",
     "koa": "^2.0.1",
     "koa-bodyparser": "^4.1.0",
+    "koa-favicon": "^2.0.0",
     "koa-jwt": "^3.0.0",
     "koa-logger": "^2.0.1",
     "koa-router": "^7.0.1",
