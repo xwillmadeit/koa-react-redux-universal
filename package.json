@@ -3,21 +3,6 @@
   "version": "0.0.1",
   "description": "Universal React Multi-Page App w/ koa2",
   "main": "index.js",
-  "scripts": {
-    "dev": "npm-run-all --parallel server-dev webpack-dev",
-    "server-dev": "cross-env NODE_ENV=dev nodemon server/index.js --exec babel-node",
-    "webpack-dev": "cross-env NODE_ENV=dev babel-node server/webpack.devServer.js",
-    "prebuild:client": "rm -rf server/public/js",
-    "build:client": "cross-env NODE_ENV=prod webpack -p",
-    "build": "npm run build:client && npm run compile",
-    "compile": "npm run compile:client && npm run compile:server",
-    "compile:client": "babel client -d dist/client --ignore client/images client/styles",
-    "postcompile:client": "cp -r client/images dist/client/images && cp -r client/styles dist/client/styles",
-    "compile:server": "babel server -d dist/server --ignore server/public",
-    "postcompile:server": "cp -r server/public dist/server/public",
-    "postbuild": "cp webpack-assets.json dist && cp isomorphic-config.js dist",
-    "start": "cross-env NODE_ENV=prod node dist/server/index.js"
-  },
   "keywords": [
     "universal",
     "react",
@@ -28,6 +13,52 @@
   ],
   "author": "xwillmadeit <xiesenzhengyi@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "npm-run-all --parallel server-dev webpack-dev",
+    "server-dev": "better-npm-run server-dev",
+    "webpack-dev": "better-npm-run webpack-dev",
+    "prebuild:client": "del server/public/build",
+    "build:client": "better-npm-run build:client",
+    "build": "npm-run-all build:client compile",
+    "compile": "npm-run-all compile:client compile:server",
+    "compile:client": "babel client -d dist/client --ignore client/images client/styles",
+    "postcompile:client": "npm run copy:assets",
+    "compile:server": "babel server -d dist/server --ignore server/public",
+    "postcompile:server": "npm run copy:public",
+    "postbuild": "npm run copy:config",
+    "copy:public": "babel server/public -d dist/server/public --copy-files",
+    "copy:config": "copy webpack-assets.json dist && copy isomorphic-config.js dist",
+    "copy:assets": "npm-run-all --parallel copy:images copy:styles",
+    "copy:images": "babel client/images -d dist/client/images --copy-files",
+    "copy:styles": "babel client/styles -d dist/client/styles --copy-files",
+    "start": "better-npm-run start"
+  },
+  "betterScripts": {
+    "start": {
+      "command": "cross-env node dist/server/index.js",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    },
+    "server-dev": {
+      "command": "cross-env nodemon server/index.js --exec babel-node",
+      "env": {
+        "NODE_ENV": "env"
+      }
+    },
+    "webpack-dev": {
+      "command": "cross-env babel-node server/webpack.devServer.js",
+      "env": {
+        "NODE_ENV": "dev"
+      }
+    },
+    "build:client": {
+      "command": "cross-env webpack -p",
+      "env": {
+        "NODE_ENV": "prod"
+      }
+    }
+  },
   "dependencies": {
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
@@ -55,8 +86,11 @@
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.2.1",
     "babel-preset-react": "^6.23.0",
+    "better-npm-run": "0.0.14",
+    "copy": "^0.3.0",
     "cross-env": "^3.2.4",
     "css-loader": "^0.27.3",
+    "del-cli": "^0.2.1",
     "eslint": "^3.17.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.6.3",
