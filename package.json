@@ -4,7 +4,7 @@
   "description": "Universal React Multi-Page App w/ koa2",
   "main": "index.js",
   "scripts": {
-    "dev": "npm run server-dev & npm run webpack-dev",
+    "dev": "npm-run-all --parallel server-dev webpack-dev",
     "server-dev": "cross-env NODE_ENV=dev nodemon server/index.js --exec babel-node",
     "webpack-dev": "cross-env NODE_ENV=dev babel-node server/webpack.devServer.js",
     "prebuild:client": "rm -rf server/public/js",
@@ -67,6 +67,7 @@
     "file-loader": "^0.10.1",
     "koa-webpack-dev-middleware": "^1.4.4",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^4.0.2",
     "style-loader": "^0.14.1",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1"
