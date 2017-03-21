@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router-dom'
+import serialize from 'serialize-javascript'
 
 export const renderPage = (ctx, Module, moduleName, reducer) => {
 	let html,
@@ -48,7 +49,7 @@ const getHtmlTemplate = (html, moduleName, preloadedState) => {
 	// scripts
 	const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
 		<script>
-      		window.PRELOADED_STATE = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+      		window.PRELOADED_STATE = ${serialize(preloadedState)}
     	</script>
 	` : ``
 
