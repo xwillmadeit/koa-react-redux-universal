@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LoginForm from '../login/loginForm'
-import '../../styles/main.css'
-import '../../styles/lol.css'
+import '../../styles/main.scss'
+import '../../styles/lol.scss'
 
 export default class Lol extends Component {
     state = {

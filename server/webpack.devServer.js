@@ -1,6 +1,6 @@
 import Koa from 'koa'
 import webpack from 'webpack'
-import webpackConfig from '../webpack.config'
+import webpackConfig from '../webpack.config.babel'
 import webpackMiddleware from 'koa-webpack-dev-middleware'
 
 const app = new Koa()

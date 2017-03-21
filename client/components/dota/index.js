@@ -4,7 +4,7 @@ import {
 	Route
 } from 'react-router-dom'
 import tu from '../../images/1.jpg'
-import '../../styles/main.css'
+import '../../styles/main.scss'
 
 const Dota = () => (
     <div>
