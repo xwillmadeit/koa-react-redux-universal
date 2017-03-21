@@ -8,7 +8,7 @@ const webpack_isomorphic_tools_plugin =
   new Webpack_isomorphic_tools_plugin(require('./isomorphic-config'))
   .development()
 
-const __DEV__ = process.env.NODE_ENV !== 'prod'
+const __DEV__ = process.env.NODE_ENV !== 'production'
 
 module.exports = {
 	entry: {

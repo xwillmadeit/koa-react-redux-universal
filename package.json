@@ -37,25 +37,25 @@
     "start": {
       "command": "cross-env node dist/server/index.js",
       "env": {
-        "NODE_ENV": "prod"
+        "NODE_ENV": "production"
       }
     },
     "server-dev": {
       "command": "cross-env nodemon server/index.js --exec babel-node",
       "env": {
-        "NODE_ENV": "env"
+        "NODE_ENV": "development"
       }
     },
     "webpack-dev": {
       "command": "cross-env babel-node server/webpack.devServer.js",
       "env": {
-        "NODE_ENV": "dev"
+        "NODE_ENV": "development"
       }
     },
     "build:client": {
       "command": "cross-env webpack -p",
       "env": {
-        "NODE_ENV": "prod"
+        "NODE_ENV": "production"
       }
     }
   },

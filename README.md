@@ -17,3 +17,8 @@ npm run dev
 
 * 使用 Class properties transform 时候，eslint 报错 Parsing error: Unexpected token =
 解决：使用 babel-eslint
+
+## Something important
+
+* 在服务端启动时指定 NODE_ENV=prodction 可以避免 react 在开发模式下的各种错误检查，提高性能
+https://www.youtube.com/watch?v=PnpfGy7q96U&t=341s
