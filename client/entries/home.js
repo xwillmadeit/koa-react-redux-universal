@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
+import { AppContainer } from 'react-hot-loader'
 import Home from '../components/home'
 import { homeReducer } from '../reducers/home'
 
@@ -13,9 +14,11 @@ const store = createStore(homeReducer, preloadedState)
 
 const render = Component => {
 	ReactDOM.render(
-		<Provider store={store}>
-			<Component />
-		</Provider>,
+		<AppContainer>
+			<Provider store={store}>
+				<Component />
+			</Provider>
+		</AppContainer>,
 		document.getElementById('root')
 	)
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import setAuthorizationToken from '../utils/setAuthorizationToken'
 import Lol from '../components/lol'
 
@@ -9,7 +10,9 @@ if (localStorage.getItem('jwtToken')) {
 
 const render = Component => {
 	ReactDOM.render(
-		<Component />,
+		<AppContainer>
+			<Component />
+		</AppContainer>,
 		document.getElementById('root')
 	)
 }

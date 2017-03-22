@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import Dota from '../components/dota'
 
 const render = Component => {
 	ReactDOM.render(
-		<BrowserRouter>
-			<Component />
-		</BrowserRouter>,
+		<AppContainer>
+			<BrowserRouter>
+				<Component />
+			</BrowserRouter>
+		</AppContainer>,
 		document.getElementById('root')
 	)
 }
