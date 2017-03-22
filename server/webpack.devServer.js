@@ -1,24 +1,43 @@
-import Koa from 'koa'
-import webpack from 'webpack'
-import webpackConfig from '../webpack.config.babel'
-import webpackMiddleware from 'koa-webpack-dev-middleware'
+const Koa = require('koa')
+const webpack = require('webpack')
+const argv = require('minimist')
+const { resolve } = require('path')
+const serve = require('koa-static')
+const webpackOnlyClientConfig = require('../wepback/client.config')
+const webpackConfig = require('../webpack.config')
+const koaWebpack = require('koa-webpack')
 
 const app = new Koa()
-const compiler = webpack(webpackConfig)
 
-const serverOptions = {
-	contentBase: 'http://localhost:4000',
-	quiet: true,
-	noInfo: true,
-	hot: true,
-	inline: true,
-	lazy: false,
-	publicPath: webpackConfig.output.publicPath,
-	headers: { 'Access-Control-Allow-Origin': '*' },
-	stats: { colors: true }
-}
+if (argv(process.argv.slice(2)).client === 'only') {
+	const onlyClientCompiler = webpack(webpackOnlyClientConfig)
 
-app.use(webpackMiddleware(compiler, serverOptions))
+	const middleware = koaWebpack({
+		compiler: onlyClientCompiler,
+		dev: {
+			noInfo: true,
+			stats: { colors: true },
+			publicPath: webpackOnlyClientConfig.output.publicPath
+		}
+	})
+
+	app.use(middleware)
+
+	app.use(serve(resolve(__dirname + '/public')))
+} else {
+	const compiler = webpack(webpackConfig)
+
+	const middleware = koaWebpack({
+		compiler: compiler,
+		dev: {
+			noInfo: true,
+			publicPath: webpackConfig.output.publicPath,
+			stats: { colors: true }
+		}
+	})
+	
+	app.use(middleware)
+} 
 
 app.listen(4001, () => {
 	console.log('webpack dev server is running at 4001...')

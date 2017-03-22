@@ -11,9 +11,17 @@ delete window.PRELOADED_STATE
 
 const store = createStore(homeReducer, preloadedState)
 
-ReactDOM.render(
-	<Provider store={store}>
-		<Home />
-	</Provider>,
-	document.getElementById('root')
-)
+const render = Component => {
+	ReactDOM.render(
+		<Provider store={store}>
+			<Component />
+		</Provider>,
+		document.getElementById('root')
+	)
+}
+
+render(Home)
+
+if (module.hot) {
+  module.hot.accept('../components/home', () => { render(Home) })
+}

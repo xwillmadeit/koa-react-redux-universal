@@ -7,7 +7,15 @@ if (localStorage.getItem('jwtToken')) {
 	setAuthorizationToken(localStorage.getItem('jwtToken'))
 }
 
-ReactDOM.render(
-	<Lol />,
-	document.getElementById('root')
-)
+const render = Component => {
+	ReactDOM.render(
+		<Component />,
+		document.getElementById('root')
+	)
+}
+
+render(Lol)
+
+if (module.hot) {
+  module.hot.accept('../components/lol', () => { render(Lol) })
+}

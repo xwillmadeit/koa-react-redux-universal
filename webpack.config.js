@@ -1,8 +1,8 @@
-import webpack from 'webpack'
-import { resolve } from 'path'
-import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import Webpack_isomorphic_tools_plugin from 'webpack-isomorphic-tools/plugin'
-import isomorphicConfig from './isomorphic-config'
+const webpack = require('webpack')
+const { resolve } = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin')
+const isomorphicConfig = require('./isomorphic-config')
 
 const appRoot = process.cwd()
 
@@ -12,12 +12,12 @@ const webpack_isomorphic_tools_plugin =
 
 const __DEV__ = process.env.NODE_ENV !== 'production'
 
-export default {
+module.exports = {
     entry: {
         vendor: ['react', 'react-dom', 'redux', 'react-redux'],
-        home: './client/entries/home.js',
-        dota: './client/entries/dota.js',
-        lol: './client/entries/lol.js'
+        home: resolve(appRoot, './client/entries/home.js'),
+        dota: resolve(appRoot, './client/entries/dota.js'),
+        lol: resolve(appRoot, './client/entries/lol.js')
     },
     output: {
         path: resolve(appRoot, 'server', 'public', 'build'),
@@ -28,7 +28,7 @@ export default {
         rules: [
 	        {
 	            test: /\.js$/,
-	            exclude: resolve(__dirname, 'node_modules'),
+	            exclude: resolve(appRoot, 'node_modules'),
 	            use: [
 	                'babel-loader',
 	                'eslint-loader'

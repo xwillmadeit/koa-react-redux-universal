@@ -1,11 +1,39 @@
 {
-	"presets": [
-		"env",
-		"react"
-	],
-	"plugins": [
-		"transform-object-rest-spread",
-		"transform-class-properties",
-		"add-module-exports"
-	]
+	"env": {
+		"client": {
+			"presets": [
+				["env", {"modules": false }],
+				"react"
+			],
+			"plugins": [
+				"transform-object-rest-spread",
+				"transform-class-properties",
+				"react-hot-loader/babel"
+			]
+		},
+		"development": {
+			"presets": [
+				"env",
+				"react"
+			],
+			"plugins": [
+				"transform-object-rest-spread",
+				"transform-class-properties",
+				"add-module-exports",
+				"react-hot-loader/babel"
+			]
+		},
+		"production": {
+			"presets": [
+				"env",
+				"react"
+			],
+			"plugins": [
+				"transform-object-rest-spread",
+				"transform-class-properties",
+				"add-module-exports",
+				"react-hot-loader/babel"
+			]
+		}
+	}
 }
