@@ -9,7 +9,7 @@ import router from './routes'
 const app = new Koa()
 
 app.use(async (ctx, next) => {
-	if (__DEV__) {
+	if (process.env.NODE_ENV !== 'production') {
 	 	webpackIsomorphicTools.refresh()
 	}
 	await next()
