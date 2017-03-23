@@ -60,5 +60,6 @@ module.exports = {
       name: 'vendor'
     }),
     ...getHtmlWebpackPlugins()
-  ]
+  ],
+  devtool: 'cheap-module-eval-source-map'
 }
