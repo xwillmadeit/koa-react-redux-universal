@@ -6,13 +6,13 @@ export default class loginForm extends Component {
     password: ''
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault()
     this.props.submit({
       username: this.state.username,
@@ -51,4 +51,3 @@ export default class loginForm extends Component {
 loginForm.propTypes = {
   submit: React.PropTypes.func.isRequired
 }
-
