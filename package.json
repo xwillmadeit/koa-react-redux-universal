@@ -14,10 +14,10 @@
   "author": "xwillmadeit <xiesenzhengyi@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "npm-run-all --parallel server:dev webpack:dev",
+    "dev": "npm-run-all --parallel dev:server dev:webpack",
     "dev:client": "better-npm-run client:dev",
-    "server:dev": "better-npm-run server:dev",
-    "webpack:dev": "better-npm-run webpack:dev",
+    "dev:server": "better-npm-run dev:server",
+    "dev:webpack": "better-npm-run dev:webpack",
     "prebuild:client": "rimraf server/public/build",
     "build:client": "better-npm-run build:client",
     "build": "npm-run-all build:client compile",
@@ -41,12 +41,6 @@
         "NODE_ENV": "production"
       }
     },
-    "server:dev": {
-      "command": "cross-env nodemon server/index.js --exec babel-node",
-      "env": {
-        "NODE_ENV": "development"
-      }
-    },
     "client:dev": {
       "command": "cross-env babel-node server/webpack.devServer.js --client=only",
       "env": {
@@ -54,7 +48,13 @@
         "BABEL_ENV": "client"
       }
     },
-    "webpack:dev": {
+    "dev:server": {
+      "command": "cross-env nodemon server/index.js --exec babel-node",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    },
+    "dev:webpack": {
       "command": "cross-env babel-node server/webpack.devServer.js",
       "env": {
         "NODE_ENV": "development"
