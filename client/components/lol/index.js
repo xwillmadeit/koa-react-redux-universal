@@ -4,21 +4,21 @@ import '../../styles/main.scss'
 import '../../styles/lol.scss'
 
 export default class Lol extends Component {
-    state = {
-        users: []
-    }
+  state = {
+    users: []
+  }
 
-    submit = () => {
-        alert('server not done...')
-    }
+  submit = () => {
+    alert('server not done...')
+  }
 
-	render() {
-		return (
-            <div>
-                <h2>lol page...</h2>
+  render() {
+    return (
+      <div>
+        <h2>lol page...</h2>
 
-                <LoginForm submit={this.submit} />
-            </div>
-		)
-	}
+        <LoginForm submit={this.submit} />
+      </div>
+    )
+  }
 }

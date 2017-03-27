@@ -5,14 +5,14 @@ import { BrowserRouter } from 'react-router-dom'
 import Dota from '../components/dota'
 
 const render = Component => {
-	ReactDOM.render(
-		<AppContainer>
-			<BrowserRouter>
-				<Component />
-			</BrowserRouter>
-		</AppContainer>,
-		document.getElementById('root')
-	)
+  ReactDOM.render(
+    <AppContainer>
+      <BrowserRouter>
+        <Component />
+      </BrowserRouter>
+    </AppContainer>,
+    document.getElementById('root')
+  )
 }
 
 render(Dota)

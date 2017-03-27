@@ -5,16 +5,16 @@ import setAuthorizationToken from '../utils/setAuthorizationToken'
 import Lol from '../components/lol'
 
 if (localStorage.getItem('jwtToken')) {
-	setAuthorizationToken(localStorage.getItem('jwtToken'))
+  setAuthorizationToken(localStorage.getItem('jwtToken'))
 }
 
 const render = Component => {
-	ReactDOM.render(
-		<AppContainer>
-			<Component />
-		</AppContainer>,
-		document.getElementById('root')
-	)
+  ReactDOM.render(
+    <AppContainer>
+      <Component />
+    </AppContainer>,
+    document.getElementById('root')
+  )
 }
 
 render(Lol)

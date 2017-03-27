@@ -13,14 +13,14 @@ delete window.PRELOADED_STATE
 const store = createStore(homeReducer, preloadedState)
 
 const render = Component => {
-	ReactDOM.render(
-		<AppContainer>
-			<Provider store={store}>
-				<Component />
-			</Provider>
-		</AppContainer>,
-		document.getElementById('root')
-	)
+  ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </AppContainer>,
+    document.getElementById('root')
+  )
 }
 
 render(Home)
