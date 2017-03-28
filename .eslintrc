@@ -24,6 +24,7 @@
     "import/no-named-as-default-member": 0,
     "import/no-named-as-default": 0,
     "no-debugger": 1,
-    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }]
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+    "import/no-unresolved": 0
 	}
 }
