@@ -6,9 +6,7 @@
   },
   "rules": {
     "semi": 0,
-    "react/jsx-filename-extension": [1, {
-      "extensions": [".js"]
-    }],
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "react/jsx-indent": 0,
     "comma-dangle": 0,
     "arrow-body-style": 0,
@@ -26,10 +24,7 @@
     "import/no-named-as-default-member": 0,
     "import/no-named-as-default": 0,
     "no-debugger": 1,
-    "no-multiple-empty-lines": ["error", {
-      "max": 2,
-      "maxEOF": 1
-    }],
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
     "no-plusplus": [0]
   }
 }
