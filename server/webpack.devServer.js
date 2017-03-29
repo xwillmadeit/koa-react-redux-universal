@@ -10,35 +10,35 @@ const koaWebpack = require('koa-webpack')
 const app = new Koa()
 
 if (argv(process.argv.slice(2)).client === 'only') {
-	const onlyClientCompiler = webpack(webpackOnlyClientConfig)
+  const onlyClientCompiler = webpack(webpackOnlyClientConfig)
 
-	const middleware = koaWebpack({
-		compiler: onlyClientCompiler,
-		dev: {
-			noInfo: true,
-			stats: { colors: true },
-			publicPath: webpackOnlyClientConfig.output.publicPath
-		}
-	})
+  const middleware = koaWebpack({
+    compiler: onlyClientCompiler,
+    dev: {
+      noInfo: true,
+      stats: { colors: true },
+      publicPath: webpackOnlyClientConfig.output.publicPath
+    }
+  })
 
-	app.use(middleware)
+  app.use(middleware)
 
-	app.use(serve(resolve(__dirname + '/public')))
+  app.use(serve(resolve(__dirname + '/public')))
 } else {
-	const compiler = webpack(webpackConfig)
+  const compiler = webpack(webpackConfig)
 
-	const middleware = koaWebpack({
-		compiler: compiler,
-		dev: {
-			noInfo: true,
-			publicPath: webpackConfig.output.publicPath,
-			stats: { colors: true }
-		}
-	})
-	
-	app.use(middleware)
-} 
+  const middleware = koaWebpack({
+    compiler: compiler,
+    dev: {
+      noInfo: true,
+      publicPath: webpackConfig.output.publicPath,
+      stats: { colors: true }
+    }
+  })
+
+  app.use(middleware)
+}
 
 app.listen(4001, () => {
-	console.log('webpack dev server is running at 4001...')
+  console.log('webpack dev server is running at 4001...')
 })

@@ -7,5 +7,5 @@ const dirRoot = resolve(process.cwd())
 
 global.webpackIsomorphicTools = new WebpackIsomorphicTools(webpackIsomorphicConfig)
   .server(dirRoot, () => {
-      require('./server')
+    require('./server')
   })

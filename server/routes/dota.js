@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import dota from '../controllers/dota'
 
 const router = Router({
-	prefix: '/dota'
+  prefix: '/dota'
 })
 
 router.get('/', dota.index)

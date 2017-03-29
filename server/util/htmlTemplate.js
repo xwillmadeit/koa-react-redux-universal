@@ -6,62 +6,62 @@ import { StaticRouter, matchPath } from 'react-router-dom'
 import serialize from 'serialize-javascript'
 
 export const renderPage = (ctx, Module, moduleName, reducer) => {
-	let html,
-		preloadedState,
-		context = {}
+  let html,
+    preloadedState,
+    context = {}
 
-	if (typeof reducer !== 'undefined') {
-		const store = createStore(reducer)
+  if (typeof reducer !== 'undefined') {
+    const store = createStore(reducer)
 
-		html = renderToString(
-			<StaticRouter>
-			    <Provider store={store}>
-	      			<Module />
-			    </Provider>
-		    </StaticRouter>
-	  	)
+    html = renderToString(
+      <StaticRouter>
+        <Provider store={store}>
+          <Module />
+        </Provider>
+      </StaticRouter>
+    )
 
-	  	preloadedState = store.getState()
-	} else {
-		html = renderToString(
-		 	<StaticRouter location={ctx.request.url} context={context}>
-  				<Module />
-  			</StaticRouter>
-	  	)
-	}
+    preloadedState = store.getState()
+  } else {
+    html = renderToString(
+      <StaticRouter location={ctx.request.url} context={context}>
+        <Module />
+      </StaticRouter>
+    )
+  }
 
-  	return getHtmlTemplate(html, moduleName, preloadedState)
+  return getHtmlTemplate(html, moduleName, preloadedState)
 }
 
 const getHtmlTemplate = (html, moduleName, preloadedState) => {
 
-	const assets = webpackIsomorphicTools.assets()
+  const assets = webpackIsomorphicTools.assets()
 
-	// styles
-	const vendorStyleHTML = assets.styles.vendor ? `
+  // styles
+  const vendorStyleHTML = assets.styles.vendor ? `
 		<link href="${assets.styles.vendor}" rel="stylesheet" type="text/css" />
 	` : ``
 
-	const moduleStyleHTML = assets.styles[moduleName] ? `
+  const moduleStyleHTML = assets.styles[moduleName] ? `
 		<link href="${assets.styles[moduleName]}" rel="stylesheet" type="text/css" />
 	` : ``
 
-	// scripts
-	const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
+  // scripts
+  const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
 		<script>
       		window.PRELOADED_STATE = ${serialize(preloadedState)}
     	</script>
 	` : ``
 
-	const vendorScriptHTML =  `
+  const vendorScriptHTML = `
 		<script src="${assets.javascript.vendor}"></script>
 	`
 
-	const moduleScriptHTML = `
+  const moduleScriptHTML = `
 		<script src="${assets.javascript[moduleName]}"></script>
 	`
 
-	return `
+  return `
     <!doctype html>
     <html>
       <head>

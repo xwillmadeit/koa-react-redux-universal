@@ -7,7 +7,7 @@ export default async (ctx, next) => {
   if (password === 'password') {
     ctx.status = 200
     ctx.authenticateData = {
-      token: jwt.sign({ username: username }, jwtSecret), 
+      token: jwt.sign({ username: username }, jwtSecret),
       message: "Successfully logged in!"
     }
   } else {

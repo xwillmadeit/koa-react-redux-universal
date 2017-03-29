@@ -22,33 +22,33 @@ const getEntryFileWithHot = module => {
 
 const getEntry = hot => {
   return getEntryModule().reduce((entryObj, module) => {
-          if (hot) {
-              entryObj[module] = getEntryFileWithHot(module)
-          } else {
-              entryObj[module] = getEntryFile(module)
-          }
-          
-          return entryObj
-        }, {})
+    if (hot) {
+      entryObj[module] = getEntryFileWithHot(module)
+    } else {
+      entryObj[module] = getEntryFile(module)
+    }
+
+    return entryObj
+  }, {})
 }
 
-const publicPath = 
+const publicPath =
   process.env.NODE_ENV === 'production' ? 'http://localhost:4000/' : 'http://localhost:4001/'
 
 const vendors = [
-	'react', 
-	'react-dom', 
-	'redux', 
-	'react-redux'
+  'react',
+  'react-dom',
+  'redux',
+  'react-redux'
 ]
 
 const jsRules = {
-    test: /\.js$/,
-    exclude: resolve(appRoot, 'node_modules'),
-    use: [
-        'babel-loader',
-        'eslint-loader'
-    ]
+  test: /\.js$/,
+  exclude: resolve(appRoot, 'node_modules'),
+  use: [
+    'babel-loader',
+    'eslint-loader'
+  ]
 }
 
 const cssRulesOption = {
@@ -66,7 +66,7 @@ const cssRulesOption = {
 }
 
 module.exports = {
-	vendors,
+  vendors,
   getEntryModule,
   getEntry,
   publicPath,
