@@ -20,6 +20,7 @@
 			"plugins": [
 				"transform-object-rest-spread",
 				"transform-class-properties",
+        ["import", { "libraryName": "antd", "style": "css" }],
 				"add-module-exports"
 			]
 		},
@@ -31,6 +32,7 @@
 			"plugins": [
 				"transform-object-rest-spread",
 				"transform-class-properties",
+        ["import", { "libraryName": "antd", "style": "css" }],
 				"add-module-exports"
 			]
 		}

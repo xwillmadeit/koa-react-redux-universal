@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
-import 'antd/dist/antd.css'
 import Register from '../components/register'
 
 const render = Component => {
