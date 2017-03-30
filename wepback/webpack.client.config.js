@@ -2,12 +2,15 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const {
-  getEntry,
-  getEntryModule,
   vendors,
   publicPath,
   jsRules
-} = require('./base.config')
+} = require('./index').basicConfig
+const {
+  getEntry,
+  getEntryModule
+} = require('./index').entryHandler
+
 const { sortPackage } = require('./utils')
 
 const appRoot = process.cwd()
@@ -18,7 +21,8 @@ const getHtmlWebpackPlugins = () => {
       chunks: ['vendor', module],
       chunksSortMode: sortPackage(['vendor', module]),
       template: resolve(appRoot, 'index.html'),
-      filename: `${module}.html`
+      filename: `${module}.html`,
+      title: `${module} page`
     })
   })
 }

@@ -1,9 +1,8 @@
 const { readdirSync } = require('fs')
 const { resolve } = require('path')
-
+const basicConfig = require('./config')
+const { entryPath } = basicConfig
 const appRoot = process.cwd()
-
-const entryPath = 'client/entries'
 
 // ['dota.js', 'home.js', 'lol.js']
 const entryFiles = readdirSync(resolve(appRoot, entryPath))
@@ -32,44 +31,7 @@ const getEntry = hot => {
   }, {})
 }
 
-const publicPath =
-  process.env.NODE_ENV === 'production' ? 'http://localhost:4000/' : 'http://localhost:4001/'
-
-const vendors = [
-  'react',
-  'react-dom',
-  'redux',
-  'react-redux'
-]
-
-const jsRules = {
-  test: /\.js$/,
-  exclude: resolve(appRoot, 'node_modules'),
-  use: [
-    'babel-loader',
-    'eslint-loader'
-  ]
-}
-
-const cssRulesOption = {
-  fallback: 'style-loader',
-  use: [
-    {
-      loader: 'css-loader',
-      options: {
-        importLoaders: 1
-      }
-    },
-    'postcss-loader',
-    'sass-loader'
-  ]
-}
-
 module.exports = {
-  vendors,
   getEntryModule,
-  getEntry,
-  publicPath,
-  jsRules,
-  cssRulesOption
+  getEntry
 }

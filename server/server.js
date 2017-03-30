@@ -21,6 +21,8 @@ app.use(favicon(__dirname + '/public/favicon.ico'))
 app.use(serve(resolve(__dirname + '/public')))
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(4000, () => {
-	console.log('app is running at 4000...')
+const PORT = process.env.PORT || 4000
+
+app.listen(PORT, () => {
+	console.log(`app is running at ${PORT}...`)
 })

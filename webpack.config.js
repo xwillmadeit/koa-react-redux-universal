@@ -5,11 +5,13 @@ const Webpack_isomorphic_tools_plugin = require('webpack-isomorphic-tools/plugin
 const isomorphicConfig = require('./isomorphic-config')
 const {
 	vendors,
-	getEntry,
 	publicPath,
+  hashLength,
+  sizeLimit,
 	jsRules,
 	cssRulesOption
-} = require('./wepback/base.config')
+} = require('./wepback').basicConfig
+const { getEntry } = require('./wepback').entryHandler
 
 const appRoot = process.cwd()
 
@@ -23,7 +25,7 @@ module.exports = {
   entry: Object.assign({}, { vendor: vendors }, getEntry()),
   output: {
     path: resolve(appRoot, 'server/public/build'),
-    filename: __DEV__ ? '[name].js' : '[name].[chunkhash:8].js',
+    filename: __DEV__ ? '[name].js' : `[name].[chunkhash:${hashLength}].js`,
     publicPath: `${publicPath}build/`
   },
   module: {
@@ -35,7 +37,7 @@ module.exports = {
       },
       {
         test: webpack_isomorphic_tools_plugin.regular_expression('images'),
-        loader: 'url-loader?limit=10240'
+        loader: `url-loader?limit=${sizeLimit}`
       },
       {
         test: webpack_isomorphic_tools_plugin.regular_expression('fonts'),
@@ -43,7 +45,7 @@ module.exports = {
       },
       {
         test: webpack_isomorphic_tools_plugin.regular_expression('svg'),
-        loader: 'url-loader?limit=10240'
+        loader: `url-loader?limit=${sizeLimit}`
       }
     ]
   },
@@ -52,7 +54,7 @@ module.exports = {
       name: 'vendor'
     }),
     new ExtractTextPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: `[name].[contenthash:${hashLength}].css`,
       disable: __DEV__
     }),
     webpack_isomorphic_tools_plugin

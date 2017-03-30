@@ -3,7 +3,7 @@ const webpack = require('webpack')
 const argv = require('minimist')
 const { resolve } = require('path')
 const serve = require('koa-static')
-const webpackOnlyClientConfig = require('../wepback/client.config')
+const webpackOnlyClientConfig = require('../wepback/webpack.client.config')
 const webpackConfig = require('../webpack.config')
 const koaWebpack = require('koa-webpack')
 
@@ -39,6 +39,8 @@ if (argv(process.argv.slice(2)).client === 'only') {
   app.use(middleware)
 }
 
-app.listen(4001, () => {
-  console.log('webpack dev server is running at 4001...')
+const PORT = process.env.PORT || 4001
+
+app.listen(PORT, () => {
+  console.log(`webpack dev server is running at ${PORT}...`)
 })
