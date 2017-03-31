@@ -6,9 +6,9 @@ import {
 import tu from '../../images/1.jpg'
 import '../../styles/main.scss'
 
-const Dota = () => (
+const Dota = props => (
   <div>
-    <h1>Dota Pages...</h1>
+    <h1>{JSON.stringify(props.gameList)}</h1>
     <nav>
       <NavLink activeStyle={{ color: 'red' }} to="/dota/about1">dota about1</NavLink>
       <NavLink activeStyle={{ color: 'red' }} to="/dota/about2">dota about2</NavLink>
@@ -18,5 +18,9 @@ const Dota = () => (
     <Route path="/dota/about2" render={() => <div>dota about2</div>} />
   </div>
 )
+
+Dota.propTypes = {
+  gameList: React.PropTypes.object.isRequired
+}
 
 export default Dota

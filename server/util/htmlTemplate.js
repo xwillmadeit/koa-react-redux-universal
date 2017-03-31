@@ -5,8 +5,11 @@ import { Provider } from 'react-redux'
 import { StaticRouter, matchPath } from 'react-router-dom'
 import serialize from 'serialize-javascript'
 
-export const renderPage = (ctx, Module, moduleName, reducer) => {
+export const renderPage = (ctx, Module, moduleName, options = {}) => {
+
   let html,
+    reducer = options.reducer,
+    propsData = options.propsData,
     preloadedState,
     context = {}
 
@@ -16,7 +19,7 @@ export const renderPage = (ctx, Module, moduleName, reducer) => {
     html = renderToString(
       <StaticRouter>
         <Provider store={store}>
-          <Module />
+          <Module {...propsData} />
         </Provider>
       </StaticRouter>
     )
@@ -25,15 +28,15 @@ export const renderPage = (ctx, Module, moduleName, reducer) => {
   } else {
     html = renderToString(
       <StaticRouter location={ctx.request.url} context={context}>
-        <Module />
+        <Module {...propsData} />
       </StaticRouter>
     )
   }
 
-  return getHtmlTemplate(html, moduleName, preloadedState)
+  return getHtmlTemplate(html, moduleName, preloadedState, propsData)
 }
 
-const getHtmlTemplate = (html, moduleName, preloadedState) => {
+const getHtmlTemplate = (html, moduleName, preloadedState, propsData) => {
 
   const assets = webpackIsomorphicTools.assets()
 
@@ -46,11 +49,18 @@ const getHtmlTemplate = (html, moduleName, preloadedState) => {
 		<link href="${assets.styles[moduleName]}" rel="stylesheet" type="text/css" />
 	` : ``
 
+  // props
+  const propsScriptHTML = typeof propsData !== 'undefined' ? `
+    <script>
+      window.PROPS = ${serialize(propsData)}
+    </script>
+  ` : ``
+
   // scripts
   const reduxScriptHTML = typeof preloadedState !== 'undefined' ? `
 		<script>
-      		window.PRELOADED_STATE = ${serialize(preloadedState)}
-    	</script>
+		  window.PRELOADED_STATE = ${serialize(preloadedState)}
+  	</script>
 	` : ``
 
   const vendorScriptHTML = `
@@ -76,6 +86,7 @@ const getHtmlTemplate = (html, moduleName, preloadedState) => {
       </head>
       <body>
         <div id="root">${html}</div>
+        ${propsScriptHTML}
         ${reduxScriptHTML}
         ${vendorScriptHTML}
         ${moduleScriptHTML}
