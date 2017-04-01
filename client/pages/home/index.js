@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { increment, decrement } from '../../actions/home'
-import '../../styles/main.scss'
+import '../../components/styles/common.scss'
+import Footer from '../../components/footer'
 
 class Hello extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class Hello extends Component {
   }
 
   decre = () => {
-    this.props.decre(3)
+    this.props.decre(2)
   }
 
   render() {
@@ -27,6 +28,7 @@ class Hello extends Component {
           <li><a href="/lol">Lol</a></li>
           <li><a href="/dota">Dota</a></li>
         </ul>
+        <Footer />
       </div>
     )
   }

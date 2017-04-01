@@ -5,11 +5,11 @@ const FormItem = Form.Item
 
 class RegistrationForm extends Component {
   state = {
-    confirmDirty: false,
+    confirmDirty: false
   }
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values)
@@ -18,12 +18,12 @@ class RegistrationForm extends Component {
   }
 
   handleConfirmBlur = e => {
-    const value = e.target.value;
+    const value = e.target.value
     this.setState({ confirmDirty: this.state.confirmDirty || !!value })
   }
 
   checkConfirm = (rule, value, callback) => {
-    const form = this.props.form;
+    const form = this.props.form
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
@@ -31,9 +31,14 @@ class RegistrationForm extends Component {
   }
 
   updateStep = () => {
-    this.props.updateStep({
-      step: 'prev',
-      userInfo: this.props.userInfo
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      this.props.updateStep({
+        step: 'prev',
+        userInfo: {
+          ...this.props.userInfo,
+          ...values
+        }
+      })
     })
   }
 
@@ -42,24 +47,24 @@ class RegistrationForm extends Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 6 },
+        sm: { span: 6 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 14 },
-      },
+        sm: { span: 14 }
+      }
     }
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
           span: 24,
-          offset: 0,
+          offset: 0
         },
         sm: {
           span: 14,
-          offset: 6,
-        },
-      },
+          offset: 6
+        }
+      }
     }
     return (
       <Form onSubmit={this.handleSubmit}>
@@ -69,6 +74,7 @@ class RegistrationForm extends Component {
           hasFeedback
         >
           {getFieldDecorator('email', {
+            initialValue: this.props.userInfo.email,
             rules: [{
               type: 'email', message: ' 邮箱 不是有效的电子邮件地址.',
             }, {
@@ -85,6 +91,7 @@ class RegistrationForm extends Component {
           hasFeedback
         >
           {getFieldDecorator('identity', {
+            initialValue: this.props.userInfo.identity,
             rules: [{
               required: true, message: 'Please input your identity!',
             }],
@@ -99,6 +106,7 @@ class RegistrationForm extends Component {
           hasFeedback
         >
           {getFieldDecorator('fullname', {
+            initialValue: this.props.userInfo.fullname,
             rules: [{ required: true, message: 'Please input your fullname!', whitespace: true }],
           })(
             <Input />
@@ -112,6 +120,7 @@ class RegistrationForm extends Component {
           <Row gutter={8}>
             <Col span={12}>
               {getFieldDecorator('captcha', {
+                initialValue: this.props.userInfo.captcha,
                 rules: [{ required: true, message: 'Please input the captcha you got!' }],
               })(
                 <Input size="large" />
@@ -125,6 +134,7 @@ class RegistrationForm extends Component {
 
         <FormItem {...tailFormItemLayout} style={{ marginBottom: 8 }}>
           {getFieldDecorator('agreement', {
+            initialValue: this.props.userInfo.agreement,
             valuePropName: 'checked',
           })(
             <Checkbox>我接受<a>《VPGAME用户协议》</a></Checkbox>

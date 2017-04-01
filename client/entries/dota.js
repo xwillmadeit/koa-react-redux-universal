@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
-import Dota from '../components/dota'
+import Dota from '../pages/dota/home'
 
 const props = window.PROPS
 
@@ -22,5 +22,5 @@ const render = Component => {
 render(Dota)
 
 if (module.hot) {
-  module.hot.accept('../components/dota', () => { render(Dota) })
+  module.hot.accept('../pages/dota/home', () => { render(Dota) })
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { AppContainer } from 'react-hot-loader'
-import Home from '../components/home'
+import Home from '../pages/home'
 import { homeReducer } from '../reducers/home'
 
 const preloadedState = window.PRELOADED_STATE
@@ -26,5 +26,5 @@ const render = Component => {
 render(Home)
 
 if (module.hot) {
-  module.hot.accept('../components/home', () => { render(Home) })
+  module.hot.accept('../pages/home', () => { render(Home) })
 }

@@ -1,4 +1,4 @@
-import Dota from '../../client/components/dota'
+import Dota from '../../client/pages/dota/home'
 import { renderPage } from '../util/htmlTemplate'
 import { GameService } from '../services/dota'
 import getDataFromApi from '../util/getDataFromApi'

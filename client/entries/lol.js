@@ -1,12 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-import setAuthorizationToken from '../utils/setAuthorizationToken'
-import Lol from '../components/lol'
-
-if (localStorage.getItem('jwtToken')) {
-  setAuthorizationToken(localStorage.getItem('jwtToken'))
-}
+import Lol from '../pages/lol/home'
 
 const render = Component => {
   ReactDOM.render(
@@ -20,5 +15,5 @@ const render = Component => {
 render(Lol)
 
 if (module.hot) {
-  module.hot.accept('../components/lol', () => { render(Lol) })
+  module.hot.accept('../pages/lol/home', () => { render(Lol) })
 }

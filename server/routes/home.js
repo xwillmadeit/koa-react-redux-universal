@@ -8,4 +8,3 @@ const router = Router({
 router.get('/', home.index)
 
 export default router
-

@@ -1,4 +1,4 @@
-import Home from '../../client/components/home'
+import Home from '../../client/pages/home'
 import { renderPage } from '../util/htmlTemplate'
 import { homeReducer } from '../../client/reducers/home'
 

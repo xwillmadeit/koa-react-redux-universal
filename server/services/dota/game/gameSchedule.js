@@ -1,7 +1,8 @@
 import fetch from '../../../util/fetch'
+import { DotaAPI } from '../../../api'
 
 const getGameSchedule = () => {
-  return fetch('https://api.github.com/users/xwillmadeit', 'get')
+  return fetch(DotaAPI.GAME_LIST, 'get')
 }
 
 export default getGameSchedule

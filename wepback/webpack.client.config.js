@@ -5,11 +5,11 @@ const {
   vendors,
   publicPath,
   jsRules
-} = require('./index').basicConfig
+} = require('.').basicConfig
 const {
   getEntry,
   getEntryModule
-} = require('./index').entryHandler
+} = require('.').entryHandler
 
 const { sortPackage } = require('./utils')
 

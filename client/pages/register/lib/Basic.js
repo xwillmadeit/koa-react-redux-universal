@@ -5,23 +5,26 @@ const FormItem = Form.Item
 
 class RegistrationForm extends Component {
   state = {
-    confirmDirty: false,
+    confirmDirty: false
   }
 
   handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.updateStep({
           step: 'next',
-          userInfo: values
+          userInfo: {
+            ...this.props.userInfo,
+            ...values
+          }
         })
       }
     })
   }
 
   handleConfirmBlur = e => {
-    const value = e.target.value;
+    const value = e.target.value
     this.setState({ confirmDirty: this.state.confirmDirty || !!value })
   }
 
@@ -35,7 +38,7 @@ class RegistrationForm extends Component {
   }
 
   checkConfirm = (rule, value, callback) => {
-    const form = this.props.form;
+    const form = this.props.form
     if (value && this.state.confirmDirty) {
       form.validateFields(['confirm'], { force: true });
     }
@@ -43,27 +46,27 @@ class RegistrationForm extends Component {
   }
 
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const { getFieldDecorator } = this.props.form
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 6 },
+        sm: { span: 6 }
       },
       wrapperCol: {
         xs: { span: 24 },
-        sm: { span: 14 },
-      },
+        sm: { span: 14 }
+      }
     }
     const tailFormItemLayout = {
       wrapperCol: {
         xs: {
           span: 24,
-          offset: 0,
+          offset: 0
         },
         sm: {
           span: 14,
-          offset: 6,
-        },
+          offset: 6
+        }
       },
     }
     return (

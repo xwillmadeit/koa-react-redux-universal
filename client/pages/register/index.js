@@ -1,25 +1,32 @@
 import React, { Component } from 'react'
-import Basic from './Basic'
-import Detail from './Detail'
-import '../../styles/register.scss'
+import './index.scss'
+import Basic from './lib/Basic'
+import Detail from './lib/Detail'
 
-class Register extends Component {
+class RegisterPage extends Component {
   state = {
     step: 1,
     userInfo: {
       username: '',
-      password: ''
+      password: '',
+      email: '',
+      identity: '',
+      fullname: '',
+      captcha: '',
+      agreement: false
     }
   }
 
   updateStep = ({ step, userInfo }) => {
     if (step === 'next') {
       this.setState({
+        ...this.state,
         step: this.state.step + 1,
         userInfo
       })
     } else {
       this.setState({
+        ...this.state,
         step: this.state.step - 1,
         userInfo
       })
@@ -41,4 +48,5 @@ class Register extends Component {
   }
 }
 
-export default Register
+export default RegisterPage
+
