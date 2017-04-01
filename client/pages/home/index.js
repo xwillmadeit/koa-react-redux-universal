@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { increment, decrement } from '../../actions/home'
-import '../../components/styles/common.scss'
+import '../../styles/common.scss'
 import Footer from '../../components/footer'
 
 class Hello extends Component {
