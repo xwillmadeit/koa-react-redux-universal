@@ -10,7 +10,7 @@ const app = new Koa()
 
 app.use(async (ctx, next) => {
   if (process.env.NODE_ENV !== 'production') {
-    /* eslint no-undef: "off" */
+    // eslint-disable-next-line no-undef
     webpackIsomorphicTools.refresh()
   }
   await next()
@@ -25,6 +25,6 @@ app.use(router.routes()).use(router.allowedMethods())
 const PORT = process.env.PORT || 4000
 
 app.listen(PORT, () => {
-  /* eslint no-console: "off" */
+  // eslint-disable-next-line no-console
   console.log(`app is running at ${PORT}...`)
 })
