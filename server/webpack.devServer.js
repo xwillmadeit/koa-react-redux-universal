@@ -1,3 +1,4 @@
+/* eslint-disable */
 const Koa = require('koa')
 const webpack = require('webpack')
 const argv = require('minimist')

@@ -1,5 +1,4 @@
 const getDataFromApi = async (apiList, keyList) => {
-
   const result = await Promise.all(apiList)
 
   return keyList.reduce((acc, value, index) => {

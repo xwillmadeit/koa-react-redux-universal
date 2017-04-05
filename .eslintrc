@@ -2,7 +2,8 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "env": {
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "rules": {
     "semi": 0,
@@ -31,6 +32,9 @@
       "maxEOF": 1
     }],
     "no-plusplus": [0],
-    "import/no-unresolved": 0
+    "import/no-unresolved": 0,
+    "no-param-reassign": 0,
+    "global-require": 0,
+    "import/no-dynamic-require": 0
   }
 }

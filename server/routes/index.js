@@ -16,7 +16,7 @@ readdirSync(__dirname)
 
 router.get('/', home.index)
 
-router.get('*', async (ctx, next) => {
+router.get('*', async ctx => {
   ctx.body = 'Page not exists...'
 })
 

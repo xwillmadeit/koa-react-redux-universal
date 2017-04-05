@@ -3,16 +3,15 @@ import { renderPage } from '../util/htmlTemplate'
 import { GameService } from '../services/dota'
 import getDataFromApi from '../util/getDataFromApi'
 
-const index = async (ctx, next) => {
-
+const index = async ctx => {
   const propsData = await getDataFromApi(
     [
       GameService.gameList(),
       GameService.gameSchedule()
     ],
     [
-      "gameList",
-      "gameSchedule"
+      'gameList',
+      'gameSchedule'
     ]
   )
 
